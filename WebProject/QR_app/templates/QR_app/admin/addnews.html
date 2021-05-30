@@ -1,0 +1,13 @@
+{% extends 'baseLayout.html' %}
+
+{% block content %}
+<h>добавление новостей на главную страницу</h>
+
+<h1>Новая запись в Новости</h1>
+ <form method="POST" class="new_person">
+     {% csrf_token %}
+    {{ form.as_p }}
+ <button type="submit">Save</button>
+ </form>
+
+{% endblock %}

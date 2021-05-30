@@ -1,0 +1,35 @@
+{% extends 'baseLayout.html' %}
+
+{% block content %}
+<div class="adminPanel">
+    <a href="/"> На главную</a>
+</div>
+<div class="adminPanel">
+    <a href="/QR_app/admin/admin"> На панель администрации</a>
+</div>
+<div class="adminPanel">
+    <a href="/QR_app/createPerson">Добавить новое отслеживание</a>
+</div>
+<div>
+    <p>Имя: {{ person.name }}<p>
+    <p>Фамилия: {{ person.sname }}<p>
+    <p>Отчество: {{ person.patronymic }}<p>
+    <p>Дата рождения: {{ person.dateOfBirth }}</p>
+    <p>Адресс: {{ person.adress }}</p>
+
+    <p>QR_code:
+        {% if person.qr_code %}
+    <img src= {{ person.qr_code.url }} alt="qr" width="250" height="250">
+        {% else %}
+        <h1>Изображения нет, человек не подтвержден</h1>
+        {% endif %}
+    <br />
+    <p>Статус: {{ person.status }}</p>
+    <p>Кто добавил:  {{ person.user }}  </p>
+
+    <hr/>
+    <a href={{person.get_update_status_url }}> Изменить статус</a>
+</div>
+
+
+{% endblock %}

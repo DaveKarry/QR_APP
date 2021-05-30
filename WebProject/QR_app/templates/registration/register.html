@@ -1,0 +1,24 @@
+{% extends 'baseLayout.html'%}
+{% block content%}
+    <h1>Страница регистрации.</h1>
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+
+        {% if form.errors %}
+        <p>Ошибки в форме</p>
+        {% endif %}
+        
+        {{ form }}
+
+        <input type="submit" value="Register">
+    </form>
+    {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+
+{% endblock %}

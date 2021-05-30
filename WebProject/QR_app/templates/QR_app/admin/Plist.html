@@ -1,0 +1,33 @@
+{% extends 'baseLayout.html' %}
+
+{% block content %}
+<div class="adminPanel">
+    <a href="/"> На главную</a>
+</div>
+<div class="adminPanel">
+    <a href="/QR_app/admin/admin"> На панель администрации</a>
+</div>
+<div class="adminPanel">
+    <a href="/QR_app/createPerson">Добавить новое отслеживание</a>
+</div>
+<div>
+    {% for person in plist %}
+    <p>Имя: {{ person.name }}<p>
+    <p>Фамилия: {{ person.sname }}<p>
+    <p>Отчество: {{ person.patronymic }}<p>
+    <p>Дата рождения: {{ person.dateOfBirth }}</p>
+    <p>Адресс: {{ person.adress }}</p>
+    {% if person.status == "Act" %}
+    <h1>Статус: {{ person.get_status_display }}</h1>
+    {% else %}
+    <p>Статус: {{ person.get_status_display }}</p>
+    {% endif %}
+    <p>Кто добавил:  {{ person.user }}  </p>
+    <p><a href="{{ person.get_absolute_url }}"> Подробнее</a> </p>
+    <hr/>
+
+    {% endfor %}
+</div>
+
+
+{% endblock %}

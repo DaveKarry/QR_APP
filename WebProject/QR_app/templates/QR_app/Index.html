@@ -1,0 +1,43 @@
+{% extends 'baseLayout.html' %}
+
+{% block content %}
+<div class="navbar">
+    {% if user.is_authenticated %}
+    <div class="registerPerson">
+        <a href="QR_app/createPerson">Зарегистрировать новое отслеживание</a>
+    </div>
+    <div class="out">
+        <a href="QR_app/out">Выйти</a>
+    </div>
+    {% else %}
+    <div class="register">
+        <a href="/QR_app/register">Регистрация</a>
+    </div>
+    <div class="login">
+        <a href="/accounts/login">Войти</a>
+    </div>
+    {% endif %}
+
+    {% if user.is_superuser %}
+    <div class="adminPanel">
+        <a href="QR_app/admin/admin">Панель администратора </a>
+    </div>
+    {% endif %}
+
+</div>
+<hr>
+<div class="news_block">
+    {% for post in news %}
+    {% if user.is_superuser %}
+    <a href="{{ post.get_delete_url }}">Удалить новость</a>
+    {% endif %}
+    <h2> {{ post.title }}</h2>
+    <p> {{post.img }}</p>
+    <p> {{ post.creationDate }}</p>
+    <p> {{ post.content }}</p>
+    
+    <hr>
+    {% endfor %}
+
+</div>
+{% endblock %}
